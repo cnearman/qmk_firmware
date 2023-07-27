@@ -6,11 +6,12 @@
 enum layer_names {
     BASE_LAYER,
     NUMBER_LAYER,
-    SYMBOL_LAYER
+    SYMBOL_LAYER,
+    NAVIGATION_LAYER
 };
 
 // Left-hand home row mods
-#define HOME_A LGUI_T(KC_A)
+#define HOME_TAB LGUI_T(KC_A)
 #define HOME_S LALT_T(KC_S)
 #define HOME_D LCTL_T(KC_D)
 #define HOME_F LSFT_T(KC_F)
@@ -22,10 +23,10 @@ enum layer_names {
 #define HOME_SCLN RGUI_T(KC_SCLN)
 
 // Left-hand home row mods
-#define NUM_LGUI LGUI_T(XXXXXXX)
-#define NUM_LALT LALT_T(XXXXXXX)
-#define NUM_LCTL LCTL_T(XXXXXXX)
-#define NUM_LSFT LSFT_T(XXXXXXX)
+#define NUM_LGUI LGUI_T(KC_1)
+#define NUM_LALT LALT_T(KC_2)
+#define NUM_LCTL LCTL_T(KC_3)
+#define NUM_LSFT LSFT_T(KC_4)
 
 // Right-hand home row mods
 #define NUM_RSFT RSFT_T(KC_DOWN)
@@ -59,14 +60,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       */
     [BASE_LAYER] = LAYOUT_split_3x6_3(
         KC_ESCAPE,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                                       KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,      XXXXXXX,
-        KC_TAB, HOME_A,  HOME_S,  HOME_D,  HOME_F,  KC_G,                                       KC_H,    HOME_J,  HOME_K,  HOME_L,  HOME_SCLN, KC_QUOT,
-        XXXXXXX, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                                       KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,   XXXXXXX,
-                                            XXXXXXX, KC_BSPC, LAY_UP_ENT,           LAY_DN_ENT,  KC_SPC,  XXXXXXX
+        KC_TAB, KC_A,  HOME_S,  HOME_D,  HOME_F,  KC_G,                                       KC_H,    HOME_J,  HOME_K,  HOME_L,  KC_SCLN, KC_QUOT,
+        KC_LEFT_GUI, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                                       KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,   XXXXXXX,
+                                            XXXXXXX, KC_BSPC, LAY_DN_ENT,           LAY_UP_ENT,  KC_SPC,  DF(NAVIGATION_LAYER)
     ),
 
     [NUMBER_LAYER] = LAYOUT_split_3x6_3(
         _______,  KC_1,     KC_2,       KC_3,       KC_4,       KC_5,                                    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,  _______,
-        _______,  NUM_LGUI, NUM_LALT,   NUM_LCTL,   NUM_LSFT,   _______,                                 KC_LEFT, KC_DOWN,  KC_UP, KC_RIGHT,  _______, _______,
+        _______,  NUM_LGUI, NUM_LALT,   NUM_LCTL,   NUM_LSFT,   KC_5,                                   KC_6,     KC_7,    KC_8,    KC_9,    KC_0, _______,
         _______,  _______,  _______,    _______,    _______,    _______,                                 _______, _______, _______, _______, _______, _______,
                                                     _______,    _______,    _______,           _______,  _______,  _______
     ),
@@ -74,7 +75,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [SYMBOL_LAYER] = LAYOUT_split_3x6_3(
         _______, _______, _______, _______, LSFT(KC_LEFT_BRACKET), _______,                             _______,    RSFT(KC_RIGHT_BRACKET),  _______,    KC_MINUS,    KC_EQUAL,  _______,
         _______, _______, _______, _______, LSFT(KC_9),            _______,                             _______,    RSFT(KC_0),             _______,  _______,  _______, _______,
-        _______, _______, _______, _______, KC_LEFT_BRACKET,       _______,                             _______,    KC_RIGHT_BRACKET,       _______, _______, _______, _______,
+        DT_DOWN, DT_PRNT, DT_UP, _______, KC_LEFT_BRACKET,       _______,                             _______,    KC_RIGHT_BRACKET,       _______, _______, _______, _______,
                                             _______,               _______, KC_ESCAPE,        _______,  _______,    _______
+    ),
+    [NAVIGATION_LAYER] = LAYOUT_split_3x6_3(
+        _______, _______, _______, KC_PGUP, _______, _______,                             _______, _______, KC_UP,    _______,  _______, _______,
+        KC_TAB, _______, KC_HOME, KC_PGDN, KC_END, _______,                             _______, KC_LEFT, KC_DOWN,  KC_RIGHT, _______, _______,
+        _______, _______, _______, _______, _______, _______,                             _______, _______, _______,  _______,  _______, _______,
+                                            _______, _______, KC_ESCAPE,        _______,  _______, DF(BASE_LAYER)
     )
 };
